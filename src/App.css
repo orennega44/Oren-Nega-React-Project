@@ -1,0 +1,251 @@
+/** @format */
+@import '/node_modules/bootstrap/dist/css/bootstrap.min.css';
+
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+body {
+	height: 100vh;
+	width: 100vw;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: lightskyblue;
+}
+
+/* NAVBAR */
+
+.navbar {
+	height: 10vh;
+	background-image: linear-gradient(#fff, lightskyblue);
+	width: 100vw;
+}
+.container-fluid {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-evenly;
+}
+
+#navbarNavAltMarkup {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-evenly;
+}
+
+.navbar-brand {
+	font-size: 2rem;
+	font-weight: 500;
+}
+
+.navbar-nav {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	width: 30%;
+	height: 6vh;
+}
+
+.navLinks {
+	color: #000;
+	text-decoration: none;
+	width: 20%;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	font-size: 1.1rem;
+	font-weight: 500;
+	background-color: #00000027;
+	color: #000000;
+	border-radius: 12px;
+	border-color: transparent;
+	transition: all 250ms ease-in-out;
+}
+
+.navLinks:hover {
+	color: #fff;
+	background-color: #000000ac;
+}
+
+.fa-regular {
+	font-size: 1.7rem;
+	margin-top: 7px;
+}
+
+/* HOME */
+
+.home {
+	width: 100vw;
+	height: 90vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+}
+
+.allCards {
+	width: 100%;
+	height: 80%;
+	display: grid;
+	grid-template-columns: repeat(3, 0.3fr);
+	grid-template-rows: repeat(6, 0.3fr);
+	justify-content: center;
+	gap: 10px;
+	overflow: auto;
+}
+
+.card {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-content: space-evenly;
+	width: 100%;
+	object-fit: cover;
+}
+
+.card img {
+	width: 100%;
+	height: 50%;
+	object-fit: cover;
+}
+
+.card-iqons {
+	width: 60%;
+	height: 10%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	align-items: center;
+	justify-self: center;
+}
+
+.card-text {
+	overflow-y: auto;
+	scrollbar-width: thin;
+	height: 10.5vh;
+}
+
+
+.pagination{
+
+	width: 50%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	align-items: center;
+	gap: 4px;
+}
+
+
+.pagination button{
+	padding: 5px;
+	width: 100%;
+	border-radius: 20px;
+	border-color: transparent;
+	
+}
+
+.act{
+	background-color: rgb(73, 64, 64);
+}
+
+/* LOGIN */
+
+.loginForm {
+	margin-top: 30px;
+	border-radius: 12px;
+	display: flex;
+	flex-direction: column;
+	justify-self: center;
+	justify-content: space-evenly;
+	align-items: center;
+	height: 80vh;
+	width: 80vw;
+	background-color: #fff;
+}
+
+.loginForm h2 {
+	font-size: 2.5rem;
+}
+
+#loginBtn {
+	width: 60%;
+	height: 10%;
+}
+
+/* REGISTER */
+
+.form {
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+	/* border: 1px solid #000; */
+}
+
+.topRegister {
+	/* border: 1px solid #000; */
+	border-radius: 12px;
+	width: 80vw;
+	height: 35vh;
+	display: flex;
+	flex-direction: column;
+	align-items: top;
+	justify-content: space-evenly;
+	text-align: center;
+	gap: 1px;
+	background-color: #fff;
+}
+
+.bottomRegister {
+	/* border: 1px solid #000; */
+	border-radius: 12px;
+	width: 80vw;
+	height: 35vh;
+	display: flex;
+	flex-direction: column;
+	align-items: top;
+	justify-content: space-evenly;
+	text-align: center;
+	gap: 1px;
+	background-color: #fff;
+}
+
+.col {
+	display: flex;
+	justify-content: center;
+}
+
+.form-control {
+	width: 30vw;
+}
+
+.isBusines {
+	width: 50vw;
+	height: 7vh;
+	background-color: #fff;
+	border-radius: 12px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+#isBusines {
+	width: 20px;
+	height: 20px;
+}
+
+#regBtn {
+	width: 50vw;
+	height: 8vh;
+	border-radius: 12px;
+	font-size: 1.7rem;
+}
