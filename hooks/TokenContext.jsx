@@ -1,9 +1,4 @@
-/* eslint-disable react/prop-types */
-/**
- * eslint-disable react/prop-types
- *
- * @format
- */
+
 
 import { jwtDecode } from 'jwt-decode';
 import { createContext, useEffect, useState } from 'react';

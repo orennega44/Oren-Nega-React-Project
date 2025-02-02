@@ -1,8 +1,12 @@
-/** @format */
+
 
 import { useContext, useEffect, useState } from 'react';
 import '../styles/UserProfile.css';
-import { deleteUser, getUserById, updateUsersBusinessStatus } from '../services/UsersService';
+import {
+	deleteUser,
+	getUserById,
+	updateUsersBusinessStatus,
+} from '../services/UsersService';
 import { useNavigate, useParams } from 'react-router-dom';
 import { UserStatus } from '../../hooks/TokenContext';
 import { ThemeContext } from '../../hooks/ThemeContext';
@@ -27,20 +31,22 @@ function UserProfile() {
 				console.log(error);
 			}
 		}
-	}, [decodedToken._id,token]);
+	}, [decodedToken._id, token]);
 
-	const handleBusinessStatus= async(userId)=>{
+	const handleBusinessStatus = async (userId) => {
 		try {
-			await updateUsersBusinessStatus(userId,token).then((res)=> {console.log(res.data),successMessage("user business status changed!");
-			}).catch((err)=>{console.log(err),
-				errorMessage("falied changing business status")
-			})
+			await updateUsersBusinessStatus(userId, token)
+				.then((res) => {
+					console.log(res.data),
+						successMessage('user business status changed!');
+				})
+				.catch((err) => {
+					console.log(err), errorMessage('falied changing business status');
+				});
 		} catch (error) {
-console.log(error)
-
+			console.log(error);
 		}
-
-	}
+	};
 
 	const handleDelete = async (userId) => {
 		if (id === decodedToken._id) {

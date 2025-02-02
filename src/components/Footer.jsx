@@ -1,4 +1,4 @@
-/** @format */
+
 
 import { NavLink } from 'react-router-dom';
 import '../styles/Footer.css';

@@ -1,5 +1,3 @@
-/* eslint-disable react/prop-types */
-/** @format */
 
 import { createContext, useState } from 'react';
 

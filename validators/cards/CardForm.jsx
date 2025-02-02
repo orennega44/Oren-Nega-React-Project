@@ -1,9 +1,3 @@
-/* eslint-disable react/prop-types */
-/**
- * eslint-disable react/prop-types
- *
- * @format
- */
 
 import '../../src/styles/ModalContent.css';
 function CardForm({ formik }) {

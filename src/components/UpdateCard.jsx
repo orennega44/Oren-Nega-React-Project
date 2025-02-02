@@ -1,8 +1,4 @@
-/**
- * eslint-disable react/prop-types
- *
- * @format
- */
+
 
 import '../styles/UpdateCard.css';
 import { useContext, useEffect, useState } from 'react';

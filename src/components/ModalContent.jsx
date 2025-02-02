@@ -1,15 +1,4 @@
-/* eslint-disable react/prop-types */
-/**
- * eslint-disable react/prop-types
- *
- * @format
- */
 
-/**
- * eslint-disable react/prop-types
- *
- * @format
- */
 
 import '../styles/ModalContent.css';
 import { useFormik } from 'formik';

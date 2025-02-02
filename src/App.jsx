@@ -1,14 +1,4 @@
-/**
- * eslint-disable no-unused-vars
- *
- * @format
- */
 
-/**
- * eslint-disable no-unused-vars
- *
- * @format
- */
 
 import './styles/App.css';
 import Navbar from './components/NavBar';
@@ -32,6 +22,7 @@ import UpdateCard from './components/UpdateCard';
 import UserProfile from './components/UserProfile';
 import SandBox from './components/SandBox';
 import UserUpdate from './components/UpdateUser';
+import Page404 from './components/Page404';
 
 
 
@@ -97,6 +88,10 @@ function AppContent() {
 							<Route
 								path='/sandbox'
 								element={<SandBox />}
+							/>
+							<Route
+								path='/*'
+								element={<Page404 />}
 							/>
 						</Routes>
 						{modalOpen && (

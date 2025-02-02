@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+
 import { useContext, useEffect, useState } from 'react';
 import '../styles/Card.css';
 import { ThemeContext } from '../../hooks/ThemeContext';
@@ -34,9 +34,7 @@ function Card({ card }) {
 				})
 				.catch((err) => {
 					errorMessage('failed card deleting'), console.log(err);
-					console.log(card._id);
-					console.log(card.bizNumber);
-					console.log(token);
+					
 				});
 		} catch (error) {
 			console.log(error);

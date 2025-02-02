@@ -1,10 +1,4 @@
-/**
- * eslint-disable no-unused-vars
- *
- * @format
- */
 
-/** @format */
 
 import { useContext, useEffect, useState } from 'react';
 import '../styles/FavCards.css';
@@ -46,7 +40,7 @@ function FavCards() {
 		}
 	}, [decodedToken]);
 
-	console.log(myFavCards);
+	
 
 	return (
 		<>

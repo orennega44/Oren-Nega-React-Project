@@ -1,4 +1,4 @@
-/** @format */
+
 import '../styles/About.css';
 import { ThemeContext } from '../../hooks/ThemeContext';
 import { useContext } from 'react';

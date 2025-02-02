@@ -1,4 +1,4 @@
-/** @format */
+
 import { useFormik } from 'formik';
 import '../styles/Login.css';
 import * as yup from 'yup';

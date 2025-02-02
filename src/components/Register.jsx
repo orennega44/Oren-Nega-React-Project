@@ -1,10 +1,4 @@
-/**
- * eslint-disable no-unused-vars
- *
- * @format
- */
 
-/** @format */
 
 import '../styles/Register.css';
 import * as yup from 'yup';
@@ -18,7 +12,7 @@ import { LuRefreshCcw } from 'react-icons/lu';
 import { useContext } from 'react';
 import {ThemeContext} from '../../hooks/ThemeContext'
 
-// chack the register prosses
+
 
 function Register() {
 	const navigate = useNavigate();
