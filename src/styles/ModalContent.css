@@ -1,0 +1,53 @@
+/** @format */
+
+.modal-content {
+	height: 100%;
+}
+
+.modal-header {
+	display: flex;
+	justify-content: center;
+
+	height: 10vh;
+}
+.modal-header h5{
+    font-size: 1.7rem;
+}
+
+.darkModal{
+background-color: rgb(60, 60, 60);
+}
+
+.twosInput{
+    
+    margin: 0;padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.eachInput{
+    margin: 10px;padding: 0;
+    width: 70%;
+}
+.eachInput input{
+    width: 100%;
+}
+
+
+.modal-footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    
+
+}
+
+.createBtn,.resetBtn{
+    width: 30%;
+    height: 6vh;
+}
+
+
+
+

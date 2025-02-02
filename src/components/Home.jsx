@@ -1,148 +1,131 @@
 /** @format */
 
-// import { useEffect, useState } from 'react';
-// import { getAllCards } from '../services/Cards';
-
-// function Home() {
-// 	const [data, setData] = useState([]);
-
-// 	useEffect(() => {
-// 		getAllCards().then((data) => setData(data.data)).catch((err) => {
-// 				console.error('Error Fetchiong Data ' + err);
-// 			});
-			
-			
-// 	},[]);
-
-// 	console.log(data);
-	
-
-// 	return (
-// 		<>
-// 			<div className='home'>
-// 				<h3>home</h3>
-
-// 				<div className='allCards'>
-// 					{data.map((card) => (
-// 						<div
-// 							key={card._id}
-// 							className='card'>
-// 							<img
-// 								src={card.image.url} 
-// 								className='card-img-top'
-// 								alt={card.image.alt}
-// 							/>
-
-// 							<div className='card-body'>
-// 								<h5 className='card-title'>{card.title}</h5>
-// 								<p className='card-text'>{card.description}</p>
-// 								<hr></hr>
-// 								<span className='cardInfo'>
-// 									<p>Phone: {card.phone} </p>
-// 									<p>
-// 										Address: {card.address.street}  {card.address.houseNumber}, 
-// 										{card.address.city}
-// 									</p>
-// 									<p>Card Number: {card.bizNumber} </p>
-// 								</span>
-// 								<div className='card-iqons'>
-// 									<i className='fa-solid fa-heart'></i>
-// 									<i className='fa-solid fa-phone'></i>
-// 								</div>
-// 							</div>
-// 						</div>
-// 					))}
-// 				</div>
-// 			</div>
-// 		</>
-// 	);
-// }
-
-// export default Home;
-
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState, useTransition } from 'react';
+import { getAllCards } from '../services/CardsService';
+import Card from './Card';
+import AddCardBtn from './AddCardBtn';
+import '../styles/Home.css';
+import { SearchContext } from '../../hooks/SearchContext';
+import { SearchBar } from '../services/searchBar';
+import { UserStatus } from '../../hooks/TokenContext';
+import { ThemeContext } from '../../hooks/ThemeContext';
 
 function Home() {
-	const [data, setData] = useState([]); // All fetched data
-	const [currentPage, setCurrentPage] = useState(1); // Current page
-	const cardsPerPage = 12; // Number of cards per page
+	const [data, setData] = useState([]);
+	const [filteredData, setFilteredData] = useState([]);
+	const { searchQuery } = useContext(SearchContext);
+	const [currentPage, setCurrentPage] = useState(1);
+	const { token, decodedToken } = useContext(UserStatus);
+	const [isPending, startTransition] = useTransition();
+	const { dark } = useContext(ThemeContext);
+
+	const body = document.querySelector('body');
+	!dark ? (body.className = '') : (body.className = 'dark');
+
+	const itemsPerPage = 6;
 
 	useEffect(() => {
-		fetch('https://monkfish-app-z9uza.ondigitalocean.app/bcard2/cards')
-			.then((res) => res.json())
-			.then((info) => setData(info))
-			.catch((error) => console.error('Error fetching data:', error));
+		getAllCards()
+			.then((res) => {
+				setData(res.data);
+				setFilteredData(res.data);
+			})
+			.catch((err) => {
+				console.error('Error Fetching Data:', err);
+			});
 	}, []);
 
-	// Calculate the cards to display for the current page
-	const indexOfLastCard = currentPage * cardsPerPage;
-	const indexOfFirstCard = indexOfLastCard - cardsPerPage;
-	const currentCards = data.slice(indexOfFirstCard, indexOfLastCard);
+	useEffect(() => {
+		startTransition(() => {
+			const result = SearchBar(searchQuery, data);
+			setFilteredData(result);
+		});
+	}, [data, searchQuery]);
 
-	// Handle page change
-	const totalPages = Math.ceil(data.length / cardsPerPage);
-	const handlePageChange = (page) => {
-		if (page >= 1 && page <= totalPages) {
-			setCurrentPage(page);
+	const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+	const startIndex = (currentPage - 1) * itemsPerPage;
+	const currentCards = filteredData.slice(
+		startIndex,
+		startIndex + itemsPerPage,
+	);
+
+	const getPageNumbers = () => {
+		const pageNumbers = [];
+		for (let i = currentPage; i <= Math.min(currentPage + 6, totalPages); i++) {
+			pageNumbers.push(i);
 		}
+		return pageNumbers;
+	};
 
+	const handlePageChange = (pageNumber) => {
+		if (pageNumber >= 1 && pageNumber <= totalPages) {
+			setCurrentPage(pageNumber);
+		}
 	};
 
 	return (
 		<>
-			<div className='home'>
-				<h3>Home</h3>
+			<div className={dark ? 'home darkHome' : 'home'}>
+				<h3 className='homeTitle'>Home</h3>
 
-				<div className='allCards'>
-					{currentCards.map((card) => (
-						<div
-							key={card._id}
-							className='card'>
-							<img
-								src={card.image.url}
-								className='card-img-top'
-								alt={card.image.alt}
-							/>
-							<div className='card-body'>
-								<h5 className='card-title'>{card.title}</h5>
-								<p className='card-text'>{card.description}</p>
-								<hr />
-								<span className='cardInfo'>
-									<p>Phone: {card.phone}</p>
-									<p>
-										Address: {card.street} {card.houseNumber} {card.city}
-									</p>
-									<p>Card Number: {card.bizNumber}</p>
-								</span>
-								<div className='card-iqons'>
-									<i className='fa-solid fa-heart'></i>
-									<i className='fa-solid fa-phone'></i>
-								</div>
-							</div>
-						</div>
-					))}
-				</div>
+				{isPending ? (
+					<div
+						className='spinner-border'
+						role='status'>
+						<span className='visually-hidden'>Loading...</span>
+					</div>
+				) : currentCards ? (
+					<div
+						className='allCards'
+						id='topCards'>
+						{currentCards.map((card) => (
+							
+									<Card
+										key={card._id}
+										card={card}
+									/>
+								
+							
+						))}
+					</div>
+				) : (
+					<div className='noDataCard'>
+						<p>card not found!</p>
+					</div>
+				)}
 
-				{/* Pagination Controls */}
-				<div className='pagination'>
+				{token && decodedToken.isBusiness && <AddCardBtn />}
+
+				<div className='pagination-controls'>
+					<button
+						onClick={() => handlePageChange(1)}
+						disabled={currentPage === 1}>
+						&laquo;
+					</button>
 					<button
 						onClick={() => handlePageChange(currentPage - 1)}
 						disabled={currentPage === 1}>
-						Previous
+						&lsaquo;
 					</button>
-					{Array.from({ length: totalPages }, (_, i) => (
+
+					{getPageNumbers().map((pageNumber) => (
 						<button
-							key={i + 1}
-							onClick={() => handlePageChange(i + 1)}
-							className={currentPage === i + 1 ? 'act' : ''}>
-							{i + 1}
+							key={pageNumber}
+							onClick={() => handlePageChange(pageNumber)}
+							className={currentPage === pageNumber ? 'active' : ''}>
+							{pageNumber}
 						</button>
 					))}
+
 					<button
 						onClick={() => handlePageChange(currentPage + 1)}
-						disabled={currentPage === totalPages}
-                        onScroll='#top'>
-						Next
+						disabled={currentPage === totalPages}>
+						&rsaquo;
+					</button>
+					<button
+						onClick={() => handlePageChange(totalPages)}
+						disabled={currentPage === totalPages}>
+						&raquo;
 					</button>
 				</div>
 			</div>

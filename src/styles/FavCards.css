@@ -1,0 +1,48 @@
+/** @format */
+
+.Container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	height: 80vh;
+	width: 100vw;
+}
+.Container h3 {
+	width: 40vw;
+	justify-self: flex-start;
+	margin: 0;
+}
+
+.favCards {
+	width: 100%;
+	text-align: center;
+	display: grid;
+	grid-template-columns: repeat(2,33vw);
+	grid-template-rows: repeat(1,70vh);
+	justify-content: center;
+	align-items: center;
+	justify-items: center;
+	overflow: auto;
+
+}
+
+.favCards h2{
+	position: absolute;
+}
+
+.Fcard{
+	width: 80%;
+	height: 90%;
+
+}
+
+.favCards::-webkit-scrollbar{
+background-color: transparent;
+color: transparent;
+}
+
+@media (max-width: 990px){
+	
+}
